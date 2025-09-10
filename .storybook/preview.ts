@@ -1,4 +1,5 @@
 import type { Preview } from '@storybook/react-vite';
+import { themes } from 'storybook/internal/theming';
 
 const preview: Preview = {
   parameters: {
@@ -15,6 +16,23 @@ const preview: Preview = {
       // 'off' - skip a11y checks entirely
       test: 'todo',
     },
+
+    docs: {
+      theme: themes.dark,
+    },
+
+    backgrounds: {
+      default: 'dark',
+      values: [
+        { name: 'dark', value: '#000000' },
+        { name: 'light', value: '#ffffff' },
+      ],
+    },
+
+    options: {
+      theme: themes.dark,
+    },
+
     viewMode: 'story',
   },
 };
