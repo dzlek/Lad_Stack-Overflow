@@ -1,0 +1,71 @@
+$primary: rgb(25, 118, 210);
+$primary-hover: rgb(17, 82, 147);
+$primary-text: rgb(255, 255, 255);
+$text-color: rgb(25, 118, 210);
+$outline-color: rgba(25, 118, 210, 0.5);
+$disabled-bg: rgba(0, 0, 0, 0.12);
+$disabled-text: rgba(0, 0, 0, 0.26);
+
+.button {
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.2s,
+    transform 0.1s;
+
+  &.contained {
+    background: $primary;
+    color: $primary-text;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    &:hover:not(:disabled) {
+      background: $primary-hover;
+      transform: translateY(-1px);
+    }
+  }
+
+  &.text {
+    background: transparent;
+    color: $text-color;
+
+    &:hover:not(:disabled) {
+      background: rgba(25, 118, 210, 0.04);
+    }
+  }
+
+  &.outlined {
+    background: transparent;
+    border: 1px solid $outline-color;
+    color: $text-color;
+
+    &:hover:not(:disabled) {
+      background: rgba(25, 118, 210, 0.04);
+    }
+  }
+
+  &.small {
+    padding: 4px 10px;
+    font-size: 0.8125rem;
+  }
+
+  &.medium {
+    padding: 6px 16px;
+    font-size: 0.875rem;
+  }
+
+  &.large {
+    padding: 8px 22px;
+    font-size: 0.9375rem;
+  }
+
+  &:disabled {
+    background: $disabled-bg;
+    color: $disabled-text;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
