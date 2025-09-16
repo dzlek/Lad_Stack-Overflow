@@ -72,4 +72,15 @@ describe('Select', () => {
     await user.click(selectDiv);
     expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   });
+
+  it('renders with external value', () => {
+    render(
+      <Select
+        label="Age"
+        options={[{ label: 'None', value: '0' }]}
+        value="0"
+      />,
+    );
+    expect(screen.getByText('None')).toBeInTheDocument();
+  });
 });

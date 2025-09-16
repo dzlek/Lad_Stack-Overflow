@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import s from './select.module.scss';
 
 interface SelectProps {
@@ -10,6 +10,7 @@ interface SelectProps {
     label: string;
     value: string;
   }[];
+  value?: string;
   onChange?: (value: string) => void;
 }
 
@@ -19,15 +20,20 @@ export function Select({
   disabled = false,
   helperText,
   options,
+  value: externalValue,
   onChange,
 }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [value, setValue] = useState(' ');
+  const [internalValue, setInternalValue] = useState(externalValue || '');
 
-  const selectedOption = options.find((opt) => opt.value === value);
+  useEffect(() => {
+    setInternalValue(externalValue ?? '');
+  }, [externalValue]);
+
+  const selectedOption = options.find((opt) => opt.value === internalValue);
 
   const handleSelect = (val: string) => {
-    setValue(val);
+    setInternalValue(val);
     onChange?.(val);
     setIsOpen(false);
   };
@@ -58,10 +64,10 @@ export function Select({
             <li
               key={opt.value}
               className={`${s.option} ${
-                value === opt.value ? s.selectedOption : ''
+                internalValue === opt.value ? s.selectedOption : ''
               }`}
               role="option"
-              aria-selected={value === opt.value}
+              aria-selected={internalValue === opt.value}
               onClick={() => handleSelect(opt.value)}
             >
               {opt.label}

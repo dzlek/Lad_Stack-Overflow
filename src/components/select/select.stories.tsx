@@ -48,3 +48,12 @@ export const Error: Story = {
     helperText: 'Invalid selection',
   },
 };
+
+export const ValueViaProps: Story = {
+  args: {
+    label: 'Age',
+    options: mockOptions,
+    helperText: 'Should be Ten',
+    value: '10',
+  },
+};
