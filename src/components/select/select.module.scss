@@ -1,0 +1,99 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+
+  .label {
+    position: absolute;
+    left: 10px;
+    top: -0.437rem;
+    padding: 0 4px;
+    font-size: 0.875rem;
+    border-radius: 4px;
+    color: rgba(0, 0, 0, 0.6);
+    background-color: var(--label-bg);
+
+    &.disabled {
+      color: var(--disabled-text);
+    }
+  }
+
+  .select {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: 1px solid var(--outline-color);
+    border-radius: 4px;
+    background: var(--label-bg);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
+
+    &:hover {
+      border-color: var(--primary);
+    }
+
+    &.errorSelect {
+      border-color: var(--error);
+    }
+
+    &.disabled {
+      background: var(--disabled-bg);
+      color: var(--disabled-text);
+      cursor: not-allowed;
+    }
+  }
+
+  .arrow {
+    font-size: 0.75rem;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .options {
+    position: absolute;
+    top: calc(1.75rem + 8px);
+    left: 0;
+    right: 0;
+
+    border-radius: 4px;
+    background: var(--label-bg);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .option {
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.26);
+    }
+  }
+
+  .selectedOption {
+    background: rgba(25, 118, 210, 0.12);
+    color: var(--primary);
+  }
+
+  .helperText {
+    font-size: 0.75rem;
+    margin-top: 2px;
+    color: rgba(0, 0, 0, 0.6);
+
+    &.errorHelperText {
+      color: var(--error);
+    }
+
+    &.disabled {
+      color: var(--disabled-text);
+    }
+  }
+}
