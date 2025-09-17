@@ -5,33 +5,28 @@ type HtmlInputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 export interface CheckboxProps extends HtmlInputProps {
   label?: string;
-  checked?: boolean;
-  defaultChecked?: boolean;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  isChecked?: boolean;
 }
 
 export function Checkbox({
   label,
   disabled = false,
   className = '',
-  checked,
-  defaultChecked,
+  isChecked,
   onChange,
   ...rest
 }: CheckboxProps) {
   const id = useId();
-  const [internalChecked, setInternalChecked] = useState(
-    defaultChecked ?? false,
-  );
+  const [internalChecked, setInternalChecked] = useState(isChecked ?? false);
 
   useEffect(() => {
-    if (checked !== undefined) {
-      setInternalChecked(checked);
+    if (isChecked !== undefined) {
+      setInternalChecked(isChecked);
     }
-  }, [checked]);
+  }, [isChecked]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (checked === undefined) {
+    if (isChecked === undefined) {
       setInternalChecked(e.target.checked);
     }
     onChange?.(e);
@@ -42,7 +37,7 @@ export function Checkbox({
       <input
         id={id}
         type="checkbox"
-        className={`${s.checkbox}  ${className}`}
+        className={`${s.checkbox} ${className}`}
         disabled={disabled}
         checked={internalChecked}
         onChange={handleChange}
