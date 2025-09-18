@@ -1,4 +1,4 @@
-import { useId, useState, useEffect, ChangeEvent } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import s from './switch.module.scss';
 
 type HtmlInputProps = React.InputHTMLAttributes<HTMLInputElement>;
@@ -14,7 +14,6 @@ export function Switch({
   onChange,
   ...rest
 }: SwitchProps) {
-  const id = useId();
   const [internalChecked, setInternalChecked] = useState(isChecked ?? false);
 
   useEffect(() => {
@@ -32,7 +31,6 @@ export function Switch({
 
   return (
     <input
-      id={id}
       type="checkbox"
       role="switch"
       className={`${s.switch} ${className}`}
