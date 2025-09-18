@@ -1,0 +1,50 @@
+.switch {
+  appearance: none;
+  width: 30px;
+  height: 12px;
+  border-radius: 10px;
+  background-color: var(--disabled-bg);
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 0px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--label-bg);
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.26);
+    transition: transform 0.2s ease;
+  }
+
+  &:checked {
+    background-color: var(--outline-color);
+
+    &::before {
+      background-color: var(--primary);
+      transform: translateX(15px);
+    }
+  }
+
+  &:hover:not(:disabled):checked {
+    background-color: var(--primary);
+
+    &::before {
+      background-color: var(--primary-hover);
+      transform: translateX(15px);
+    }
+  }
+
+  &:disabled {
+    background-color: var(--disabled-bg);
+    cursor: not-allowed;
+
+    &::before {
+      background-color: var(--disabled-text);
+    }
+  }
+}
