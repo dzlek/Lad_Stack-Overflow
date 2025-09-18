@@ -3,9 +3,8 @@ import s from './switch.module.scss';
 
 type HtmlInputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
-export interface SwitchProps extends Omit<HtmlInputProps, 'onChange'> {
+export interface SwitchProps extends HtmlInputProps {
   isChecked?: boolean;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export function Switch({
