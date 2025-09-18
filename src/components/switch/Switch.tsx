@@ -4,28 +4,28 @@ import s from './switch.module.scss';
 type HtmlInputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 export interface SwitchProps extends Omit<HtmlInputProps, 'onChange'> {
-  checked?: boolean;
+  isChecked?: boolean;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export function Switch({
   disabled = false,
   className = '',
-  checked,
+  isChecked,
   onChange,
   ...rest
 }: SwitchProps) {
   const id = useId();
-  const [internalChecked, setInternalChecked] = useState(checked ?? false);
+  const [internalChecked, setInternalChecked] = useState(isChecked ?? false);
 
   useEffect(() => {
-    if (checked !== undefined) {
-      setInternalChecked(checked);
+    if (isChecked !== undefined) {
+      setInternalChecked(isChecked);
     }
-  }, [checked]);
+  }, [isChecked]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (checked === undefined) {
+    if (isChecked === undefined) {
       setInternalChecked(e.target.checked);
     }
     onChange?.(e);

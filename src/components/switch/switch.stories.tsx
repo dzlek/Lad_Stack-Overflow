@@ -5,7 +5,7 @@ const meta: Meta<typeof Switch> = {
   title: 'Components/Switch',
   component: Switch,
   argTypes: {
-    checked: { control: 'boolean' },
+    isChecked: { control: 'boolean' },
     disabled: { control: 'boolean' },
     onChange: { action: 'changed' },
   },
@@ -19,7 +19,7 @@ export const Default: Story = {
 };
 
 export const Checked: Story = {
-  args: { checked: true },
+  args: { isChecked: true },
 };
 
 export const Disabled: Story = {

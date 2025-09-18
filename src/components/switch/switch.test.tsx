@@ -30,7 +30,7 @@ describe('Switch', () => {
   });
 
   it('respects unchecked in controlled mode', () => {
-    render(<Switch checked={false} />);
+    render(<Switch isChecked={false} />);
     const toggle = screen.getByRole('switch');
     expect(toggle).not.toBeChecked();
   });
