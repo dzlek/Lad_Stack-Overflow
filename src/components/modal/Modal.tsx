@@ -1,5 +1,6 @@
 import { ReactNode, useEffect } from 'react';
 import s from './modal.module.scss';
+import { createPortal } from 'react-dom';
 
 export interface ModalProps {
   open: boolean;
@@ -30,12 +31,13 @@ export function Modal({ open, onClose, children }: ModalProps) {
 
   if (!open) return null;
 
-  return (
+  return createPortal(
     <div className={s.backdrop} data-testid="backdrop" onClick={onClose}>
       <div className={s.modal} onClick={(e) => e.stopPropagation()}>
         {children}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 
