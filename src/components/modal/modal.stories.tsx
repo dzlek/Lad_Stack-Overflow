@@ -57,10 +57,3 @@ export const Default: Story = {
     );
   },
 };
-
-export const Closed: Story = {
-  args: {
-    open: false,
-    children: 'Hidden modal',
-  },
-};
