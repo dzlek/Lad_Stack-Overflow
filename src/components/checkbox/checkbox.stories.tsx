@@ -20,7 +20,7 @@ export const Default: Story = {
 };
 
 export const Checked: Story = {
-  args: { label: 'Checked', defaultChecked: true },
+  args: { label: 'Checked', isChecked: true },
 };
 
 export const Controlled: Story = {
