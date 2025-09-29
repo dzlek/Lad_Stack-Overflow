@@ -1,15 +1,15 @@
-# Custom-components-lib
+# Lad_Stack Overflow
 
-The React component library built with TypeScript, Vite, Storybook, and Jest.
+Application represents simplified Stack Overflow analogue built with TypeScript, Vite, Storybook, and Jest.
 
 ## Task:
 
-- [link](https://drive.google.com/file/d/1C148FRnWfXVoRDslDWcYac3bEhebdIAV/view)
+- [link](https://drive.google.com/file/d/1ZsAyDKE-n00akVzM7wut2GbFHtVPCiMu/view?usp=drive_link)
 
 ## How to run the app:
 
-- Clone the repository: `git clone https://github.com/dzlek/Custom-components-lib.git`
-- Go to folder: `cd custom-components-lib`
+- Clone the repository: `git clone https://github.com/dzlek/Lad_Stack-Overflow.git`
+- Go to folder: `cd Lad_Stack-Overflow`
 - Install dependencies `npm i`
 
 THEN
