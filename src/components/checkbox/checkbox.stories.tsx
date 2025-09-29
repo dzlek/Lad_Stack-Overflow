@@ -4,6 +4,17 @@ import Checkbox from './Checkbox';
 const meta: Meta<typeof Checkbox> = {
   title: 'Components/Checkbox',
   component: Checkbox,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `
+Checkbox allows the user to toggle a single option on or off.  
+Supports controlled and uncontrolled modes, with optional label and disabled state.
+        `,
+      },
+    },
+  },
   argTypes: {
     label: { control: 'text' },
     disabled: { control: 'boolean' },

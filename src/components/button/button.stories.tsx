@@ -4,6 +4,17 @@ import Button from './Button';
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
   component: Button,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `
+Button triggers an action or event with a single click.  
+Supports different states like default and disabled.
+      `,
+      },
+    },
+  },
   argTypes: {
     children: { control: 'text' },
     variant: {

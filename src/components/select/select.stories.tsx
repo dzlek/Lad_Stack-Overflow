@@ -4,6 +4,18 @@ import Select from './Select';
 const meta: Meta<typeof Select> = {
   title: 'Components/Select',
   component: Select,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `
+Select provides a dropdown list for choosing a single option.  
+Supports controlled and uncontrolled modes with disabled state.
+      `,
+      },
+    },
+  },
+
   argTypes: {
     label: { control: 'text' },
     error: { control: 'boolean' },

@@ -4,6 +4,18 @@ import TextField from './TextField';
 const meta: Meta<typeof TextField> = {
   title: 'Components/TextField',
   component: TextField,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `
+TextField allows users to enter and edit text.  
+Supports placeholder, value, and disabled state.
+      `,
+      },
+    },
+  },
+
   argTypes: {
     label: { control: 'text' },
     placeholder: { control: 'text' },

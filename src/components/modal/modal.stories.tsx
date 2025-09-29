@@ -5,6 +5,17 @@ import { useState } from 'react';
 const meta: Meta<typeof Modal> = {
   title: 'Components/Modal',
   component: Modal,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `
+Modal displays content in an overlay on top of the page.  
+Supports open/close state, ESC key handling, and backdrop click to dismiss.
+      `,
+      },
+    },
+  },
   argTypes: {
     open: { control: 'boolean' },
     onClose: { action: 'closed' },
