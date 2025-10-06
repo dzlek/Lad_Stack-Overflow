@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { MemoryRouter } from 'react-router-dom';
 import Sidebar from './Sidebar';
 
@@ -23,13 +23,9 @@ type Story = StoryObj<typeof Sidebar>;
 export const Default: Story = {
   render: () => (
     <MemoryRouter>
-      <div
-        style={{ display: 'flex', height: '300px', border: '1px solid #ddd' }}
-      >
+      <div style={{ display: 'flex' }}>
         <Sidebar />
-        <div style={{ flex: 1, padding: '1rem' }}>
-          Main content area (click links in the sidebar)
-        </div>
+        <div>Main content </div>
       </div>
     </MemoryRouter>
   ),
