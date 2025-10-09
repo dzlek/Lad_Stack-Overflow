@@ -13,4 +13,9 @@ export type AuthContextType = {
   isAuth: boolean;
 };
 
-export const AuthContext = createContext<AuthContextType | null>(null);
+export const AuthContext = createContext<AuthContextType>({
+  user: null,
+  login: async () => {},
+  logout: () => {},
+  isAuth: false,
+});

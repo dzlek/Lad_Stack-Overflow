@@ -1,13 +1,22 @@
 import { useState, useEffect, ReactNode } from 'react';
 import axios from 'axios';
 import { AuthContext, User } from './AuthContext';
+import { STORAGE_KEYS } from './storageKeys';
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User>(null);
 
   useEffect(() => {
-    const saved = localStorage.getItem('user');
-    if (saved) setUser(JSON.parse(saved));
+    const saved = localStorage.getItem(STORAGE_KEYS.USER);
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        setUser(parsed);
+      } catch (err) {
+        console.error('Failed to parse user from localStorage:', err);
+        localStorage.removeItem(STORAGE_KEYS.USER);
+      }
+    }
   }, []);
 
   const login = async (username: string, password: string) => {
@@ -19,7 +28,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       const { data } = res.data;
       setUser(data);
-      localStorage.setItem('user', JSON.stringify(data));
+      localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(data));
     } catch (err) {
       console.error('Login error:', err);
       throw err;
@@ -28,7 +37,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('user');
+    localStorage.removeItem(STORAGE_KEYS.USER);
   };
 
   return (
