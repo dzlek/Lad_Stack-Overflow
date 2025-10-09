@@ -14,6 +14,7 @@ const LoginPage = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (isAuth) {
@@ -23,8 +24,13 @@ const LoginPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await login(username, password);
-    navigate('/');
+    setError('');
+    try {
+      await login(username, password);
+      navigate('/');
+    } catch {
+      setError('Invalid username or password');
+    }
   };
 
   return (
@@ -47,7 +53,7 @@ const LoginPage = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-
+        {error && <p className={s.error}>{error}</p>}
         <Button type="submit">Sign in</Button>
       </form>
       <Button variant="outlined" onClick={() => navigate('/register')}>
