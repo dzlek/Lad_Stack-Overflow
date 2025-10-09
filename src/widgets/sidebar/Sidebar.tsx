@@ -3,14 +3,18 @@ import { NavLink } from 'react-router-dom';
 import { Home, User, FileText, Users, HelpCircle } from 'lucide-react';
 
 import s from './sidebar.module.scss';
+import { useAuth } from '../../app/context/useAuth';
 
 const Sidebar = () => {
+  const { user } = useAuth();
   return (
     <aside className={s.sidebar}>
-      <div className={s.user}>
-        <img className={s.avatar} src="public/user.jpeg" alt="User avatar" />
-        denis
-      </div>
+      {user && (
+        <div className={s.user}>
+          <img className={s.avatar} src="public/user.jpeg" alt="User avatar" />
+          {user.username}
+        </div>
+      )}
       <nav>
         <ul className={s.navLinksList}>
           <li>
