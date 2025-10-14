@@ -1,9 +1,11 @@
 .wrapper {
   display: flex;
   height: calc(100vh - 3rem);
+  overflow: hidden;
 
   .mainWrapper {
     flex: 1;
     padding: 1rem;
+    overflow-y: auto;
   }
 }
