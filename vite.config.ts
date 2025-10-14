@@ -16,4 +16,13 @@ export default defineConfig({
       '@': path.resolve(dirname, 'src'),
     },
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://codelang.vercel.app',
+        changeOrigin: true,
+        secure: true,
+      },
+    },
+  },
 });
