@@ -11,7 +11,7 @@ const Sidebar = () => {
     <aside className={s.sidebar}>
       {user && (
         <div className={s.user}>
-          <img className={s.avatar} src="public/user.jpeg" alt="User avatar" />
+          <img className={s.avatar} src="/user.jpeg" alt="User avatar" />
           {user.username}
         </div>
       )}
