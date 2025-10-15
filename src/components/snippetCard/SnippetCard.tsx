@@ -58,8 +58,10 @@ const SnippetCard = ({ snippet, isAuth, currentUser }: SnippetCardProps) => {
   const [dislikeCount, setDislikeCount] = useState(0);
 
   useEffect(() => {
-    const likes = snippet.marks.filter((m) => m.type === 'like').length;
-    const dislikes = snippet.marks.filter((m) => m.type === 'dislike').length;
+    const likes = snippet.marks.filter((m) => m.type === MarkType.LIKE).length;
+    const dislikes = snippet.marks.filter(
+      (m) => m.type === MarkType.DISLIKE,
+    ).length;
     setLikeCount(likes);
     setDislikeCount(dislikes);
   }, [snippet.marks]);
@@ -77,9 +79,9 @@ const SnippetCard = ({ snippet, isAuth, currentUser }: SnippetCardProps) => {
       return;
     }
 
-    if (userMark.type === 'like') {
+    if (userMark.type === MarkType.LIKE) {
       setLocalMark(MarkType.LIKE);
-    } else if (userMark.type === 'dislike') {
+    } else if (userMark.type === MarkType.DISLIKE) {
       setLocalMark(MarkType.DISLIKE);
     } else {
       setLocalMark(MarkType.NONE);
