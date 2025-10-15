@@ -1,0 +1,15 @@
+.registerFormWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.error {
+  color: var(--error);
+}
+
+.linkWrapper {
+  color: var(--text-color);
+}
