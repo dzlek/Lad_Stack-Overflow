@@ -4,10 +4,13 @@ import Header from '../widgets/header/Header';
 import Sidebar from '../widgets/sidebar/Sidebar';
 
 import s from './appRouter.module.scss';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 const AppLayout = () => {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Header />
       <div className={s.wrapper}>
         <Sidebar />
@@ -15,7 +18,7 @@ const AppLayout = () => {
           <Outlet />
         </main>
       </div>
-    </>
+    </QueryClientProvider>
   );
 };
 

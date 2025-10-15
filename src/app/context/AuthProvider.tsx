@@ -22,8 +22,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = async (username: string, password: string) => {
     try {
       const res = await axios.post(
-        'https://codelang.vercel.app/api/auth/login',
+        '/api/auth/login',
         { username, password },
+        { withCredentials: true },
       );
 
       const { data } = res.data;

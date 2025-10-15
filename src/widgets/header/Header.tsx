@@ -2,13 +2,17 @@ import { Link } from 'react-router-dom';
 import Button from '../../components/button/Button';
 import { useAuth } from '../../app/context/useAuth';
 import s from './header.module.scss';
+import { CodeXml } from 'lucide-react';
 
 const Header = () => {
   const { user, logout } = useAuth();
   return (
     <header className={s.header}>
       <Link to="" className={s.logo}>
-        <span>{'</>'}</span> CODELANG
+        <span>
+          <CodeXml size={20} />
+          CODELANG
+        </span>
       </Link>
 
       <div className={s.controls}>
