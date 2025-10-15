@@ -145,14 +145,14 @@ const SnippetCard = ({ snippet, isAuth, currentUser }: SnippetCardProps) => {
       <div className={s.stats}>
         <span>
           <div
-            className={`${s.icon} ${localMark === 'like' ? s.active : ''}`}
+            className={`${s.icon} ${localMark === MarkType.LIKE ? s.active : ''}`}
             onClick={() => handleMark(MarkType.LIKE)}
           >
             <ThumbsUp size={18} />
           </div>
           {likeCount}
           <div
-            className={`${s.icon} ${localMark === 'dislike' ? s.active : ''}`}
+            className={`${s.icon} ${localMark === MarkType.DISLIKE ? s.active : ''}`}
             onClick={() => handleMark(MarkType.DISLIKE)}
           >
             <ThumbsDown size={18} />
