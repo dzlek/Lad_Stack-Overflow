@@ -9,6 +9,7 @@ import Button from '../../components/button/Button';
 import TextField from '../../components/textField/TextField';
 
 import s from './registerPage.module.scss';
+import { useMutation } from '@tanstack/react-query';
 
 type FormData = {
   username: string;
@@ -33,17 +34,23 @@ const RegisterPage = () => {
     }
   }, [isAuth, navigate]);
 
-  const onSubmit = async (data: FormData) => {
-    try {
-      await axios.post('https://codelang.vercel.app/api/register', {
-        username: data.username,
-        password: data.password,
-      });
+  const registerMutation = useMutation({
+    mutationFn: (data: { username: string; password: string }) =>
+      axios.post('https://codelang.vercel.app/api/register', data),
+    onSuccess: () => {
       navigate('/login');
-    } catch (err) {
+    },
+    onError: (err) => {
       console.error('Registration error:', err);
       alert('Please try again.');
-    }
+    },
+  });
+
+  const onSubmit = (data: FormData) => {
+    registerMutation.mutate({
+      username: data.username,
+      password: data.password,
+    });
   };
 
   const password = watch('password');
