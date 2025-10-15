@@ -93,7 +93,7 @@ const RegisterPage = () => {
       </Button>
 
       <p>
-        Already have an account?
+        {`Already have an account? `}
         <Link to="/login" className={s.linkWrapper}>
           Login
         </Link>
