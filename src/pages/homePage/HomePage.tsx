@@ -6,6 +6,7 @@ import SnippetList from '../../components/snippetList/SnippetList';
 
 import s from './homePage.module.scss';
 import { Snippet } from '../../components/snippetCard/SnippetCard';
+import { QUERY_KEYS } from '../../app/context/queryKeys';
 
 const fetchSnippets = async (): Promise<Snippet[]> => {
   const res = await axios.get('/api/snippets');
@@ -14,7 +15,7 @@ const fetchSnippets = async (): Promise<Snippet[]> => {
 
 const HomePage = () => {
   const { data: snippets, isLoading } = useQuery<Snippet[]>({
-    queryKey: ['snippets'],
+    queryKey: QUERY_KEYS.SNIPPETS,
     queryFn: fetchSnippets,
   });
 
