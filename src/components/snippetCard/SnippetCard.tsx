@@ -26,7 +26,7 @@ export type User = {
 
 export type Mark = {
   id: string;
-  type: 'like' | 'dislike';
+  type: MarkType;
   user: User;
 };
 
