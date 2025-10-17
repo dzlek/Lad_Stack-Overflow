@@ -7,7 +7,7 @@ type CommentsProp = {
 };
 
 const CommentsList = ({ comments }: CommentsProp) => {
-  if (!comments || comments.length === 0) return <div>No comments...</div>;
+  if (!comments?.length) return <div>No comments...</div>;
   return (
     <ul className={s.commentListWrapper}>
       {comments.map((c) => (
