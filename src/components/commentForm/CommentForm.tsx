@@ -5,6 +5,7 @@ import Button from '../button/Button';
 import TextField from '../textField/TextField';
 
 import s from './commentForm.module.scss';
+import { useMutation } from '@tanstack/react-query';
 
 type CommentFormProps = {
   snippetId: string;
@@ -13,27 +14,26 @@ type CommentFormProps = {
 
 const CommentForm = ({ snippetId, onSuccess }: CommentFormProps) => {
   const [text, setText] = useState('');
-  const [loading, setLoading] = useState(false);
+
+  const mutation = useMutation({
+    mutationFn: async (newComment: string) => {
+      const res = await axios.post(
+        '/api/comments',
+        { snippetId, content: newComment },
+        { withCredentials: true },
+      );
+      return res.data?.data ?? res.data;
+    },
+    onSuccess: (created) => {
+      onSuccess?.(created);
+      setText('');
+    },
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!text.trim()) return;
-    setLoading(true);
-    try {
-      const res = await axios.post(
-        '/api/comments',
-        { snippetId, content: text },
-        { withCredentials: true },
-      );
-
-      const created = res.data?.data ?? res.data;
-      onSuccess?.(created);
-      setText('');
-    } catch (err) {
-      console.error('Failed to comment', err);
-    } finally {
-      setLoading(false);
-    }
+    mutation.mutate(text);
   };
 
   return (
@@ -43,8 +43,8 @@ const CommentForm = ({ snippetId, onSuccess }: CommentFormProps) => {
         onChange={(e) => setText(e.target.value)}
         placeholder="Leave a comment..."
       />
-      <Button type="submit" disabled={loading || !text.trim()}>
-        {loading ? 'Sending...' : 'Send'}
+      <Button type="submit" disabled={mutation.isPending || !text.trim()}>
+        {mutation.isPending ? 'Sending...' : 'Send'}
       </Button>
     </form>
   );
