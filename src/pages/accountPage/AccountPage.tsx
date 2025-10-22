@@ -9,7 +9,8 @@ import { QUERY_KEYS } from '../../app/context/queryKeys';
 
 import s from './accountPage.module.scss';
 import Button from '../../components/button/Button';
-import { LogOut, Trash2 } from 'lucide-react';
+import { LogOut, Trash2, User } from 'lucide-react';
+import TextField from '../../components/textField/TextField';
 
 type UsernameFormData = { username: string };
 type PasswordFormData = { oldPassword: string; newPassword: string };
@@ -104,88 +105,123 @@ const AccountPage = () => {
 
       {stats && (
         <div className={s.stats}>
-          <p>Snippets: {stats.snippetsCount}</p>
-          <p>Comments: {stats.commentsCount}</p>
-          <p>Likes: {stats.likesCount}</p>
-          <p>Dislikes: {stats.dislikesCount}</p>
+          <div className={s.statsInfo}>
+            <User size={150} />
+            <div>
+              <p>
+                <strong>{user.username}</strong>
+              </p>
+              <p>id: {user.id}</p>
+              <p>Role: {user.role}</p>
+
+              <div className={s.actions}>
+                <Button onClick={() => logout()} className={s.signOutBtn}>
+                  <LogOut size={18} />
+                </Button>
+
+                <Button
+                  onClick={() => {
+                    if (
+                      confirm('Are you sure you want to delete your account?')
+                    )
+                      deleteMutation.mutate();
+                  }}
+                  className={s.deleteBtn}
+                >
+                  {deleteMutation.isPending ? '...' : <Trash2 size={18} />}
+                </Button>
+              </div>
+            </div>
+          </div>
+          <div className={s.statsData}>
+            <p>
+              <b>Rating:</b> {stats.rating}
+            </p>
+            <p>
+              <b>Snippets:</b> {stats.snippetsCount}
+            </p>
+            <p>
+              <b>Comments:</b> {stats.commentsCount}
+            </p>
+            <p>
+              <b>Likes:</b> {stats.likesCount}
+            </p>
+            <p>
+              <b>Dislikes:</b> {stats.dislikesCount}
+            </p>
+            <p>
+              <b>Questions:</b> {stats.questionsCount}
+            </p>
+            <p>
+              <b>Correct Answers:</b> {stats.correctAnswersCount}
+            </p>
+            <p>
+              <b>Regular Answers:</b> {stats.regularAnswersCount}
+            </p>
+          </div>
         </div>
       )}
 
-      <div className={s.forms}>
-        <form
-          onSubmit={usernameForm.handleSubmit(onUsernameSubmit)}
-          className={s.form}
-        >
-          <h3 className={s.subtitle}>Change Username</h3>
-          <input
-            {...usernameForm.register('username', { required: true })}
-            placeholder="Enter new username"
-            className={s.input}
-          />
-          <button
-            type="submit"
-            disabled={usernameMutation.isPending}
-            className={s.button}
+      <div className={s.formsWrapper}>
+        <div className={s.forms}>
+          <form
+            onSubmit={usernameForm.handleSubmit(onUsernameSubmit)}
+            className={s.form}
           >
-            {usernameMutation.isPending ? 'Saving...' : 'Save'}
-          </button>
-        </form>
+            <h3>Change Username</h3>
+            <TextField
+              {...usernameForm.register('username', { required: true })}
+              placeholder="Enter new username"
+              className={s.textfield}
+            />
+            <Button
+              type="submit"
+              disabled={usernameMutation.isPending}
+              className={s.button}
+            >
+              {usernameMutation.isPending ? 'Saving...' : 'Save'}
+            </Button>
+          </form>
 
-        <form
-          onSubmit={passwordForm.handleSubmit(onPasswordSubmit)}
-          className={s.form}
-        >
-          <h3 className={s.subtitle}>Change Password</h3>
-
-          <input
-            type="password"
-            {...passwordForm.register('oldPassword', { required: true })}
-            placeholder="Old password"
-            className={s.input}
-          />
-
-          <input
-            type="password"
-            {...passwordForm.register('newPassword', { required: true })}
-            placeholder="New password"
-            className={s.input}
-          />
-
-          <button
-            type="submit"
-            disabled={passwordMutation.isPending}
-            className={s.button}
+          <form
+            onSubmit={passwordForm.handleSubmit(onPasswordSubmit)}
+            className={s.form}
           >
-            {passwordMutation.isPending ? 'Updating...' : 'Change'}
-          </button>
-        </form>
+            <h3>Change Password</h3>
+
+            <TextField
+              type="password"
+              {...passwordForm.register('oldPassword', { required: true })}
+              placeholder="Old password"
+              className={s.textfield}
+            />
+
+            <TextField
+              type="password"
+              {...passwordForm.register('newPassword', { required: true })}
+              placeholder="New password"
+              className={s.textfield}
+            />
+
+            <Button
+              type="submit"
+              disabled={passwordMutation.isPending}
+              className={s.button}
+            >
+              {passwordMutation.isPending ? 'Updating...' : 'Change'}
+            </Button>
+          </form>
+        </div>
+        {status && (
+          <p
+            className={`${s.status} ${
+              status.startsWith('Success!') ? s.success : s.error
+            }`}
+          >
+            {status}
+          </p>
+        )}
       </div>
-
-      <div className={s.actions}>
-        <Button onClick={() => logout()} className={`${s.button} ${s.signOut}`}>
-          <LogOut size={18} />
-        </Button>
-
-        <Button
-          onClick={() => {
-            if (confirm('Are you sure you want to delete your account?'))
-              deleteMutation.mutate();
-          }}
-          className={`${s.button} ${s.delete}`}
-        >
-          {deleteMutation.isPending ? '...' : <Trash2 size={18} />}
-        </Button>
-      </div>
-
-      {status && (
-        <p
-          className={`${s.status} ${
-            status.startsWith('Success!') ? s.success : s.error
-          }`}
-        >
-          {status}
-        </p>
-      )}
     </div>
   );
 };
