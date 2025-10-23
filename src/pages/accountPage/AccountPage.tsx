@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useAuth } from '../../app/context/useAuth';
 import { STORAGE_KEYS } from '../../app/context/storageKeys';
@@ -11,13 +12,9 @@ import s from './accountPage.module.scss';
 import Button from '../../components/button/Button';
 import { LogOut, Trash2, User } from 'lucide-react';
 import TextField from '../../components/textField/TextField';
+import { PasswordFormData, passwordSchema } from '../../app/schemas/schema';
 
 type UsernameFormData = { username: string };
-type PasswordFormData = {
-  oldPassword: string;
-  newPassword: string;
-  confirmPassword: string;
-};
 
 const updateUsername = async (data: UsernameFormData) => {
   const res = await axios.patch('/api/me', data, { withCredentials: true });
@@ -51,7 +48,10 @@ const AccountPage = () => {
   const usernameForm = useForm<UsernameFormData>({
     defaultValues: { username: user?.username || '' },
   });
-  const passwordForm = useForm<PasswordFormData>();
+
+  const passwordForm = useForm<PasswordFormData>({
+    resolver: zodResolver(passwordSchema),
+  });
 
   const usernameMutation = useMutation({
     mutationFn: updateUsername,
@@ -100,13 +100,8 @@ const AccountPage = () => {
   const onUsernameSubmit = (data: UsernameFormData) =>
     usernameMutation.mutate(data);
 
-  const onPasswordSubmit = (data: PasswordFormData) => {
-    if (data.newPassword.trim().length < 6) {
-      setStatus('Password must be at least 6 characters long');
-      return;
-    }
+  const onPasswordSubmit = (data: PasswordFormData) =>
     passwordMutation.mutate(data);
-  };
 
   if (!isAuth) return <p>You must be logged in to view this page.</p>;
   if (!user) return <p>Loading user...</p>;
@@ -197,29 +192,39 @@ const AccountPage = () => {
 
             <TextField
               type="password"
-              {...passwordForm.register('oldPassword', { required: true })}
+              {...passwordForm.register('oldPassword')}
               placeholder="Old password"
               className={s.textfield}
             />
+            {passwordForm.formState.errors.oldPassword && (
+              <p className={s.error}>
+                {passwordForm.formState.errors.oldPassword.message}
+              </p>
+            )}
 
             <TextField
               type="password"
-              {...passwordForm.register('newPassword', { required: true })}
+              {...passwordForm.register('newPassword')}
               placeholder="New password"
               className={s.textfield}
             />
+            {passwordForm.formState.errors.newPassword && (
+              <p className={s.error}>
+                {passwordForm.formState.errors.newPassword.message}
+              </p>
+            )}
 
             <TextField
               type="password"
               placeholder="Confirm new password"
-              {...passwordForm.register('confirmPassword', {
-                required: 'Please confirm your password',
-                validate: (value) =>
-                  value === passwordForm.getValues('newPassword') ||
-                  'Passwords do not match',
-              })}
+              {...passwordForm.register('confirmPassword')}
               className={s.textfield}
             />
+            {passwordForm.formState.errors.confirmPassword && (
+              <p className={s.error}>
+                {passwordForm.formState.errors.confirmPassword.message}
+              </p>
+            )}
 
             <Button
               type="submit"
@@ -230,6 +235,7 @@ const AccountPage = () => {
             </Button>
           </form>
         </div>
+
         {status && (
           <p
             className={`${s.status} ${
