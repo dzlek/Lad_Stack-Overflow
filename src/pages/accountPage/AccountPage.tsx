@@ -68,6 +68,10 @@ const AccountPage = () => {
     onError: () => setStatus('Failed to update password'),
   });
 
+  const handleLogout = () => {
+    logout();
+  };
+
   const deleteMutation = useMutation({
     mutationFn: deleteUser,
     onSuccess: () => {
@@ -77,14 +81,17 @@ const AccountPage = () => {
     onError: () => setStatus('Failed to delete account'),
   });
 
+  const handleDeleteAccount = () => {
+    if (confirm('Are you sure you want to delete your account?')) {
+      deleteMutation.mutate();
+    }
+  };
+
   const { data: stats } = useQuery({
     queryKey: QUERY_KEYS.USER_STATS(user?.id || ''),
     queryFn: () => fetchUserStatistic(user!.id),
     enabled: !!user?.id,
   });
-
-  if (!isAuth) return <p>You must be logged in to view this page.</p>;
-  if (!user) return <p>Loading user...</p>;
 
   const onUsernameSubmit = (data: UsernameFormData) =>
     usernameMutation.mutate(data);
@@ -96,6 +103,9 @@ const AccountPage = () => {
     }
     passwordMutation.mutate(data);
   };
+
+  if (!isAuth) return <p>You must be logged in to view this page.</p>;
+  if (!user) return <p>Loading user...</p>;
 
   return (
     <div className={s.accountPageWrapper}>
@@ -115,19 +125,11 @@ const AccountPage = () => {
               <p>Role: {user.role}</p>
 
               <div className={s.actions}>
-                <Button onClick={() => logout()} className={s.signOutBtn}>
+                <Button onClick={handleLogout} className={s.signOutBtn}>
                   <LogOut size={18} />
                 </Button>
 
-                <Button
-                  onClick={() => {
-                    if (
-                      confirm('Are you sure you want to delete your account?')
-                    )
-                      deleteMutation.mutate();
-                  }}
-                  className={s.deleteBtn}
-                >
+                <Button onClick={handleDeleteAccount} className={s.deleteBtn}>
                   {deleteMutation.isPending ? '...' : <Trash2 size={18} />}
                 </Button>
               </div>
