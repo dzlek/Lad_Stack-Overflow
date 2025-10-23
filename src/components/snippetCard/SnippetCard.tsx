@@ -32,6 +32,7 @@ export type Mark = {
 
 export type Comment = {
   id: string;
+  user: User;
   content: string;
 };
 
@@ -162,7 +163,7 @@ const SnippetCard = ({ snippet, isAuth, currentUser }: SnippetCardProps) => {
 
         <span>
           {snippet.comments.length}{' '}
-          <Link to={`/post-snippet`}>
+          <Link to={`/post/${snippet.id}`}>
             <MessageSquare size={18} />
           </Link>
         </span>

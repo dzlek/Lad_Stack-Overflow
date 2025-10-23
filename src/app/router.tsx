@@ -5,6 +5,7 @@ import ProtectedRoute from './routes/ProtectedRoute';
 
 import HomePage from '../pages/homePage/HomePage';
 import RegisterPage from '../pages/registerPage/RegisterPage';
+import PostPage from '../pages/postPage/PostPage';
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ export const router = createBrowserRouter([
       { path: 'login', element: <LoginPage /> },
       { path: '', element: <HomePage /> },
       { path: 'register', element: <RegisterPage /> },
+      { path: 'post/:id', element: <PostPage /> },
 
       {
         element: <ProtectedRoute />,
