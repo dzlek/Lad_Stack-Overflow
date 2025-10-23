@@ -13,7 +13,11 @@ import { LogOut, Trash2, User } from 'lucide-react';
 import TextField from '../../components/textField/TextField';
 
 type UsernameFormData = { username: string };
-type PasswordFormData = { oldPassword: string; newPassword: string };
+type PasswordFormData = {
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+};
 
 const updateUsername = async (data: UsernameFormData) => {
   const res = await axios.patch('/api/me', data, { withCredentials: true });
@@ -202,6 +206,18 @@ const AccountPage = () => {
               type="password"
               {...passwordForm.register('newPassword', { required: true })}
               placeholder="New password"
+              className={s.textfield}
+            />
+
+            <TextField
+              type="password"
+              placeholder="Confirm new password"
+              {...passwordForm.register('confirmPassword', {
+                required: 'Please confirm your password',
+                validate: (value) =>
+                  value === passwordForm.getValues('newPassword') ||
+                  'Passwords do not match',
+              })}
               className={s.textfield}
             />
 
