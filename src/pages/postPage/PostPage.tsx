@@ -60,9 +60,6 @@ const PostPage = () => {
     };
   }, [id, queryClient]);
 
-  if (isLoading) return <p>Loading post...</p>;
-  if (!snippet) return <p>Snippet not found</p>;
-
   const handleLocalAdd = (newComment: Comment) => {
     if (!id) return;
     queryClient.setQueryData<Snippet>(
@@ -79,10 +76,16 @@ const PostPage = () => {
 
   return (
     <div>
-      <SnippetCard snippet={snippet} isAuth={true} currentUser={null} />
+      {isLoading && <p>Loading post...</p>}
+      {!isLoading && !snippet && <p>Snippet not found</p>}
 
-      <CommentsList comments={snippet.comments} />
-      {isAuth && <CommentForm snippetId={id!} onSuccess={handleLocalAdd} />}
+      {!isLoading && snippet && (
+        <>
+          <SnippetCard snippet={snippet} isAuth={true} currentUser={null} />
+          <CommentsList comments={snippet.comments} />
+          {isAuth && <CommentForm snippetId={id!} onSuccess={handleLocalAdd} />}
+        </>
+      )}
     </div>
   );
 };
