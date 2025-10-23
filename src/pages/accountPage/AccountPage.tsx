@@ -92,7 +92,9 @@ const AccountPage = () => {
   };
 
   const { data: stats } = useQuery({
-    queryKey: QUERY_KEYS.USER_STATS(user?.id || ''),
+    queryKey: user
+      ? [...QUERY_KEYS.USER_STATS, user.id]
+      : QUERY_KEYS.USER_STATS,
     queryFn: () => fetchUserStatistic(user!.id),
     enabled: !!user?.id,
   });
