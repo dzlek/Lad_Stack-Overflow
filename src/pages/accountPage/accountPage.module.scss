@@ -1,0 +1,88 @@
+.accountPageWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+
+  .username {
+    color: var(--primary);
+  }
+
+  .stats {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 6px;
+    padding: 0.5rem;
+    width: 100%;
+
+    .statsInfo {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      .signOutBtn {
+        background-color: orange;
+        margin: 0.5rem;
+      }
+
+      .deleteBtn {
+        background-color: brown;
+        margin: 0.5rem;
+      }
+    }
+  }
+
+  .formsWrapper {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 6px;
+    padding: 0.5rem;
+    width: 100%;
+
+    .forms {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+
+      width: 100%;
+
+      .form {
+        flex: 1;
+        text-align: left;
+
+        .label {
+          display: block;
+          font-weight: 500;
+        }
+
+        .error {
+          color: var(--error);
+        }
+        .textfield {
+          width: 100%;
+          margin: 0.5rem 0;
+        }
+
+        .button {
+          width: 100%;
+          background-color: var(--success);
+
+          &:hover {
+            background-color: var(--success-hover);
+          }
+        }
+      }
+    }
+    .status {
+      margin: 1rem;
+
+      &.success {
+        color: var(--success);
+      }
+
+      &.error {
+        color: var(--error);
+      }
+    }
+  }
+}

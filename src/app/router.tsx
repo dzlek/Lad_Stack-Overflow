@@ -6,6 +6,7 @@ import ProtectedRoute from './routes/ProtectedRoute';
 import HomePage from '../pages/homePage/HomePage';
 import RegisterPage from '../pages/registerPage/RegisterPage';
 import PostPage from '../pages/postPage/PostPage';
+import AccountPage from '../pages/accountPage/AccountPage';
 import CreatePostPage from '../pages/createPostPage/createPostPage';
 
 export const router = createBrowserRouter([
@@ -21,6 +22,8 @@ export const router = createBrowserRouter([
       {
         element: <ProtectedRoute />,
         children: [
+          { path: 'my-account', element: <AccountPage /> },
+          { path: 'post-snippet', element: <div>Post Snippet</div> },
           { path: 'my-account', element: <div>My Account Page</div> },
           { path: 'post-snippet', element: <CreatePostPage /> },
           { path: 'my-snippets', element: <div>My Snippets</div> },
