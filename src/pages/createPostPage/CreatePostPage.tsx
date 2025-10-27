@@ -59,6 +59,9 @@ const CreatePostPage = () => {
     mutation.mutate(data);
   };
 
+  const getLanguageOptions = (langs?: string[]) =>
+    langs?.map((lang) => ({ label: lang, value: lang })) ?? [];
+
   return (
     <div className={s.createPostPageWrapper}>
       <h2>Create new snippet!</h2>
@@ -77,12 +80,7 @@ const CreatePostPage = () => {
               <Select
                 {...field}
                 label="Select"
-                options={[
-                  ...(languages?.map((lang: string) => ({
-                    label: lang,
-                    value: lang,
-                  })) ?? []),
-                ]}
+                options={getLanguageOptions(languages)}
               />
             )}
           />
