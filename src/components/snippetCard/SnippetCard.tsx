@@ -153,7 +153,6 @@ const SnippetCard = ({ snippet, isAuth }: SnippetCardProps) => {
     }
   };
 
-  console.log(snippet);
   return (
     <div className={s.snippetCard}>
       <div className={s.cardHeader}>
