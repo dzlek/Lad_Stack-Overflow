@@ -8,17 +8,12 @@ type SnippetListProps = {
 };
 
 const SnippetList = ({ snippets }: SnippetListProps) => {
-  const { isAuth, user } = useAuth();
+  const { isAuth } = useAuth();
 
   return (
     <div className={s.snippetList}>
       {snippets.map((snippet) => (
-        <SnippetCard
-          key={snippet.id}
-          snippet={snippet}
-          isAuth={isAuth}
-          currentUser={user}
-        />
+        <SnippetCard key={snippet.id} snippet={snippet} isAuth={isAuth} />
       ))}
     </div>
   );

@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { QUERY_KEYS } from '../../app/context/queryKeys';
+import { useAuth } from '../../app/context/useAuth';
 
 enum MarkType {
   LIKE = 'like',
@@ -50,12 +51,12 @@ export type Snippet = {
 type SnippetCardProps = {
   snippet: Snippet;
   isAuth: boolean;
-  currentUser?: User | null;
 };
 
-const SnippetCard = ({ snippet, isAuth, currentUser }: SnippetCardProps) => {
+const SnippetCard = ({ snippet, isAuth }: SnippetCardProps) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const { user: currentUser } = useAuth();
 
   const [localMark, setLocalMark] = useState<MarkType>(MarkType.NONE);
   const [likeCount, setLikeCount] = useState(0);
@@ -152,19 +153,20 @@ const SnippetCard = ({ snippet, isAuth, currentUser }: SnippetCardProps) => {
     }
   };
 
+  console.log(snippet);
   return (
     <div className={s.snippetCard}>
       <div className={s.cardHeader}>
         <span>
           <UserIcon size={18} /> {snippet.user.username}
         </span>
-        {currentUser?.id === snippet.user.id && (
-          <span>
-            <Edit2 size={18} onClick={handleEdit} />
-            <Trash2 size={18} onClick={handleDelete} />
-          </span>
-        )}
         <span>
+          {currentUser?.id === snippet.user.id && (
+            <span>
+              <Edit2 size={18} onClick={handleEdit} />
+              <Trash2 size={18} onClick={handleDelete} />
+            </span>
+          )}
           <FileJson size={18} /> {snippet.language}
         </span>
       </div>
