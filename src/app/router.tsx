@@ -24,8 +24,6 @@ export const router = createBrowserRouter([
         element: <ProtectedRoute />,
         children: [
           { path: 'my-account', element: <AccountPage /> },
-          { path: 'post-snippet', element: <div>Post Snippet</div> },
-          { path: 'my-account', element: <div>My Account Page</div> },
           { path: 'post-snippet', element: <CreatePostPage /> },
           { path: 'my-snippets', element: <div>My Snippets</div> },
           { path: 'questions', element: <div>Questions</div> },
