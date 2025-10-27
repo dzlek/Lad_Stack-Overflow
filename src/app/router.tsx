@@ -7,7 +7,7 @@ import HomePage from '../pages/homePage/HomePage';
 import RegisterPage from '../pages/registerPage/RegisterPage';
 import PostPage from '../pages/postPage/PostPage';
 import AccountPage from '../pages/accountPage/AccountPage';
-import CreatePostPage from '../pages/createPostPage/createPostPage';
+import CreatePostPage from '../pages/createPostPage/CreatePostPage';
 import EditPostPage from '../pages/editPostPage/EditPostPage';
 
 export const router = createBrowserRouter([
