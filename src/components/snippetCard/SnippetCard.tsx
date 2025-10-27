@@ -8,8 +8,10 @@ import {
   ThumbsUp,
   ThumbsDown,
   MessageSquare,
+  Edit2,
+  Trash2,
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { QUERY_KEYS } from '../../app/context/queryKeys';
 
 enum MarkType {
@@ -53,6 +55,7 @@ type SnippetCardProps = {
 
 const SnippetCard = ({ snippet, isAuth, currentUser }: SnippetCardProps) => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const [localMark, setLocalMark] = useState<MarkType>(MarkType.NONE);
   const [likeCount, setLikeCount] = useState(0);
@@ -103,6 +106,17 @@ const SnippetCard = ({ snippet, isAuth, currentUser }: SnippetCardProps) => {
     },
   });
 
+  const deleteMutation = useMutation({
+    mutationFn: async () => {
+      await axios.delete(`/api/snippets/${snippet.id}`, {
+        withCredentials: true,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.SNIPPETS });
+    },
+  });
+
   const handleMark = useCallback(
     (mark: MarkType.LIKE | MarkType.DISLIKE) => {
       if (!isAuth) return;
@@ -130,12 +144,26 @@ const SnippetCard = ({ snippet, isAuth, currentUser }: SnippetCardProps) => {
     [isAuth, localMark, markMutation],
   );
 
+  const handleEdit = () => navigate(`/edit/${snippet.id}`);
+
+  const handleDelete = () => {
+    if (confirm('Are you sure you want to delete this snippet?')) {
+      deleteMutation.mutate();
+    }
+  };
+
   return (
     <div className={s.snippetCard}>
       <div className={s.cardHeader}>
         <span>
           <UserIcon size={18} /> {snippet.user.username}
         </span>
+        {currentUser?.id === snippet.user.id && (
+          <span>
+            <Edit2 size={18} onClick={handleEdit} />
+            <Trash2 size={18} onClick={handleDelete} />
+          </span>
+        )}
         <span>
           <FileJson size={18} /> {snippet.language}
         </span>
