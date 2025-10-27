@@ -17,3 +17,10 @@ export const passwordSchema = z
   });
 
 export type PasswordFormData = z.infer<typeof passwordSchema>;
+
+export const createSnippetSchema = z.object({
+  language: z.string().min(1, 'Language is required'),
+  code: z.string().min(1, 'Code is required'),
+});
+
+export type FormData = z.infer<typeof createSnippetSchema>;
