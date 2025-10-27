@@ -7,6 +7,7 @@ import HomePage from '../pages/homePage/HomePage';
 import RegisterPage from '../pages/registerPage/RegisterPage';
 import PostPage from '../pages/postPage/PostPage';
 import AccountPage from '../pages/accountPage/AccountPage';
+import PostsPage from '../pages/postsPage/PostsPage';
 
 export const router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ export const router = createBrowserRouter([
         children: [
           { path: 'my-account', element: <AccountPage /> },
           { path: 'post-snippet', element: <div>Post Snippet</div> },
-          { path: 'my-snippets', element: <div>My Snippets</div> },
+          { path: 'my-snippets', element: <PostsPage /> },
           { path: 'questions', element: <div>Questions</div> },
           { path: 'users', element: <div>Users</div> },
         ],
