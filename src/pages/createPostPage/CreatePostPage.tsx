@@ -8,10 +8,8 @@ import Button from '../../components/button/Button';
 import { QUERY_KEYS } from '../../app/context/queryKeys';
 import Select from '../../components/select/Select';
 
-type FormData = {
-  language: string;
-  code: string;
-};
+import { zodResolver } from '@hookform/resolvers/zod';
+import { createSnippetSchema, FormData } from '../../app/schemas/schema';
 
 const createSnippet = async (data: FormData) => {
   const res = await axios.post(
@@ -34,6 +32,7 @@ const CreatePostPage = () => {
   const [errorMsg, setErrorMsg] = useState('');
 
   const { control, register, handleSubmit, reset } = useForm<FormData>({
+    resolver: zodResolver(createSnippetSchema),
     defaultValues: { language: '', code: '' },
   });
 
@@ -75,7 +74,6 @@ const CreatePostPage = () => {
           <Controller
             name="language"
             control={control}
-            rules={{ required: true }}
             render={({ field }) => (
               <Select
                 {...field}
@@ -90,7 +88,7 @@ const CreatePostPage = () => {
 
         <textarea
           className={s.textarea}
-          {...register('code', { required: true })}
+          {...register('code')}
           rows={10}
           placeholder="Write your code here..."
         />
