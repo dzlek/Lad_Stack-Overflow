@@ -59,8 +59,8 @@ const EditPostPage = () => {
 
   const mutation = useMutation({
     mutationFn: (data: FormData) => updateSnippet(id!, data),
-    onSuccess: (updatedSnippet) => {
-      navigate(`/post/${updatedSnippet.id}`);
+    onSuccess: () => {
+      navigate(`/post/${id}`);
     },
     onError: () => {
       setErrorMsg('Failed to update snippet. Please try again.');
