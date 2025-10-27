@@ -19,6 +19,7 @@ export const router = createBrowserRouter([
       { path: '', element: <HomePage /> },
       { path: 'register', element: <RegisterPage /> },
       { path: 'post/:id', element: <PostPage /> },
+      { path: 'edit/:id', element: <EditPostPage /> },
 
       {
         element: <ProtectedRoute />,
@@ -28,7 +29,6 @@ export const router = createBrowserRouter([
           { path: 'my-snippets', element: <div>My Snippets</div> },
           { path: 'questions', element: <div>Questions</div> },
           { path: 'users', element: <div>Users</div> },
-          { path: 'edit/:id', element: <EditPostPage /> },
         ],
       },
     ],
