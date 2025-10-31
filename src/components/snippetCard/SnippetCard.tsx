@@ -8,9 +8,12 @@ import {
   ThumbsUp,
   ThumbsDown,
   MessageSquare,
+  Edit2,
+  Trash2,
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { QUERY_KEYS } from '../../app/context/queryKeys';
+import { useAuth } from '../../app/context/useAuth';
 
 enum MarkType {
   LIKE = 'like',
@@ -48,11 +51,12 @@ export type Snippet = {
 type SnippetCardProps = {
   snippet: Snippet;
   isAuth: boolean;
-  currentUser?: User | null;
 };
 
-const SnippetCard = ({ snippet, isAuth, currentUser }: SnippetCardProps) => {
+const SnippetCard = ({ snippet, isAuth }: SnippetCardProps) => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const { user: currentUser } = useAuth();
 
   const [localMark, setLocalMark] = useState<MarkType>(MarkType.NONE);
   const [likeCount, setLikeCount] = useState(0);
@@ -103,6 +107,17 @@ const SnippetCard = ({ snippet, isAuth, currentUser }: SnippetCardProps) => {
     },
   });
 
+  const deleteMutation = useMutation({
+    mutationFn: async () => {
+      await axios.delete(`/api/snippets/${snippet.id}`, {
+        withCredentials: true,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.SNIPPETS });
+    },
+  });
+
   const handleMark = useCallback(
     (mark: MarkType.LIKE | MarkType.DISLIKE) => {
       if (!isAuth) return;
@@ -130,6 +145,14 @@ const SnippetCard = ({ snippet, isAuth, currentUser }: SnippetCardProps) => {
     [isAuth, localMark, markMutation],
   );
 
+  const handleEdit = () => navigate(`/edit/${snippet.id}`);
+
+  const handleDelete = () => {
+    if (confirm('Are you sure you want to delete this snippet?')) {
+      deleteMutation.mutate();
+    }
+  };
+
   return (
     <div className={s.snippetCard}>
       <div className={s.cardHeader}>
@@ -137,6 +160,12 @@ const SnippetCard = ({ snippet, isAuth, currentUser }: SnippetCardProps) => {
           <UserIcon size={18} /> {snippet.user.username}
         </span>
         <span>
+          {currentUser?.id === snippet.user.id && (
+            <span>
+              <Edit2 size={18} onClick={handleEdit} />
+              <Trash2 size={18} onClick={handleDelete} />
+            </span>
+          )}
           <FileJson size={18} /> {snippet.language}
         </span>
       </div>
