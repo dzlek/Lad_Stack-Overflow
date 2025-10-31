@@ -1,0 +1,18 @@
+.createPostPageWrapper {
+  max-width: 600px;
+  margin: 1rem auto;
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+
+  .textarea {
+    padding: 0.5rem;
+  }
+  .error {
+    color: var(--error);
+  }
+}

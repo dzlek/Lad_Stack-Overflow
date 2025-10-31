@@ -8,6 +8,8 @@ import RegisterPage from '../pages/registerPage/RegisterPage';
 import PostPage from '../pages/postPage/PostPage';
 import AccountPage from '../pages/accountPage/AccountPage';
 import PostsPage from '../pages/postsPage/PostsPage';
+import CreatePostPage from '../pages/createPostPage/CreatePostPage';
+import EditPostPage from '../pages/editPostPage/EditPostPage';
 
 export const router = createBrowserRouter([
   {
@@ -18,13 +20,14 @@ export const router = createBrowserRouter([
       { path: '', element: <HomePage /> },
       { path: 'register', element: <RegisterPage /> },
       { path: 'post/:id', element: <PostPage /> },
+      { path: 'edit/:id', element: <EditPostPage /> },
 
       {
         element: <ProtectedRoute />,
         children: [
           { path: 'my-account', element: <AccountPage /> },
-          { path: 'post-snippet', element: <div>Post Snippet</div> },
           { path: 'my-snippets', element: <PostsPage /> },
+          { path: 'post-snippet', element: <CreatePostPage /> },
           { path: 'questions', element: <div>Questions</div> },
           { path: 'users', element: <div>Users</div> },
         ],
