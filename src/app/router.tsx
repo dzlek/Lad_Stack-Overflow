@@ -10,6 +10,7 @@ import AccountPage from '../pages/accountPage/AccountPage';
 import PostsPage from '../pages/postsPage/PostsPage';
 import CreatePostPage from '../pages/createPostPage/CreatePostPage';
 import EditPostPage from '../pages/editPostPage/EditPostPage';
+import QuestionsPage from '../pages/questionsPage/QuestionsPage';
 import UserPage from '../pages/userPage/UserPage';
 import UsersPage from '../pages/usersPage/UsersPage';
 
@@ -31,7 +32,7 @@ export const router = createBrowserRouter([
           { path: 'my-account', element: <AccountPage /> },
           { path: 'my-snippets', element: <PostsPage /> },
           { path: 'post-snippet', element: <CreatePostPage /> },
-          { path: 'questions', element: <div>Questions</div> },
+          { path: 'questions', element: <QuestionsPage /> },
           { path: 'users', element: <UsersPage /> },
         ],
       },
