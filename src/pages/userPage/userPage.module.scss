@@ -1,0 +1,13 @@
+.statsWrapper {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  padding: 0.5rem;
+  width: 100%;
+
+  .statsInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+}
