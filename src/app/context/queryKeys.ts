@@ -4,4 +4,5 @@ export const QUERY_KEYS = {
   SNIPPET_DETAILS: (id: string) => ['snippet', id],
   LANGUAGES: ['languages'],
   USERS: ['users'],
+  QUESTIONS: ['questions'],
 };
