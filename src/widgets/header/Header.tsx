@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/button/Button';
 import { useAuth } from '../../app/context/useAuth';
 import s from './header.module.scss';
@@ -6,6 +6,12 @@ import { CodeXml } from 'lucide-react';
 
 const Header = () => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const createQuestion = () => {
+    navigate(`/questions/create`);
+  };
+
   return (
     <header className={s.header}>
       <Link to="" className={s.logo}>
@@ -16,6 +22,9 @@ const Header = () => {
       </Link>
 
       <div className={s.controls}>
+        {location.pathname.startsWith('/questions') && (
+          <Button onClick={createQuestion}>Ask Question</Button>
+        )}
         {user && <Button onClick={logout}>SIGN OUT</Button>}
         <div className={s.langSwitch}>
           <button>文A</button>
