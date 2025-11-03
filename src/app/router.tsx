@@ -13,6 +13,7 @@ import EditPostPage from '../pages/editPostPage/EditPostPage';
 import QuestionsPage from '../pages/questionsPage/QuestionsPage';
 import UsersPage from '../pages/usersPage/UsersPage';
 import UserPage from '../pages/userPage/UserPage';
+import CreateQuestionPage from '../pages/createQuestionPage/CreateQuestionPage';
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ export const router = createBrowserRouter([
           { path: 'post-snippet', element: <CreatePostPage /> },
           { path: 'questions', element: <QuestionsPage /> },
           { path: 'users', element: <UsersPage /> },
+          { path: 'questions/create', element: <CreateQuestionPage /> },
         ],
       },
     ],
