@@ -29,12 +29,13 @@ const CreateQuestionPage = () => {
     },
   });
 
-  const onSubmit = (data: FormData) => mutation.mutate(data);
-
   return (
     <div className={s.createPageWrapper}>
       <h2>Ask a New Question: </h2>
-      <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+      <form
+        onSubmit={handleSubmit((data) => mutation.mutate(data))}
+        className={s.form}
+      >
         <input
           type="text"
           placeholder="Question title"
