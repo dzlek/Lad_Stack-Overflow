@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQueryClient, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 import { QUERY_KEYS } from '../../app/context/queryKeys';
 import CommentsList from '../../components/commentList/CommentsList';
@@ -14,7 +15,7 @@ import { getSocket } from '../../app/context/useSocket';
 import { useAuth } from '../../app/context/useAuth';
 
 const fetchSnippet = async (id: string): Promise<Snippet> => {
-  const res = await axios.get(`/api/snippets/${id}`);
+  const res = await axios.get(`${API_BASE}/snippets/${id}`);
   return res.data.data;
 };
 

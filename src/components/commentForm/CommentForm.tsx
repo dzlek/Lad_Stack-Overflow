@@ -4,6 +4,8 @@ import { User } from '../snippetCard/SnippetCard';
 import Button from '../button/Button';
 import TextField from '../textField/TextField';
 
+const API_BASE = import.meta.env.VITE_API_BASE || '';
+
 import s from './commentForm.module.scss';
 import { useMutation } from '@tanstack/react-query';
 
@@ -18,7 +20,7 @@ const CommentForm = ({ snippetId, onSuccess }: CommentFormProps) => {
   const mutation = useMutation({
     mutationFn: async (newComment: string) => {
       const res = await axios.post(
-        '/api/comments',
+        `${API_BASE}/comments`,
         { snippetId, content: newComment },
         { withCredentials: true },
       );

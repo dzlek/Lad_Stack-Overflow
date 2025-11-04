@@ -5,6 +5,7 @@ import s from './questionsPage.module.scss';
 import { QUERY_KEYS } from '../../app/context/queryKeys';
 import { Trash2, Eye, Cherry, SquarePen } from 'lucide-react';
 import { useAuth } from '../../app/context/useAuth';
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 type Question = {
   id: string;
@@ -28,14 +29,18 @@ const QuestionsPage = () => {
   } = useQuery({
     queryKey: QUERY_KEYS.QUESTIONS,
     queryFn: async () => {
-      const res = await axios.get('/api/questions', { withCredentials: true });
+      const res = await axios.get(`${API_BASE}/questions`, {
+        withCredentials: true,
+      });
       return res.data.data.data as Question[];
     },
   });
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
-      await axios.delete(`/api/questions/${id}`, { withCredentials: true });
+      await axios.delete(`${API_BASE}/questions/${id}`, {
+        withCredentials: true,
+      });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.QUESTIONS });

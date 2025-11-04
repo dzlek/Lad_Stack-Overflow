@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../app/context/useAuth';
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 import axios from 'axios';
 
@@ -36,7 +37,7 @@ const RegisterPage = () => {
 
   const registerMutation = useMutation({
     mutationFn: (data: { username: string; password: string }) =>
-      axios.post('https://codelang.vercel.app/api/register', data),
+      axios.post(`${API_BASE}/register`, data),
     onSuccess: () => {
       navigate('/login');
     },

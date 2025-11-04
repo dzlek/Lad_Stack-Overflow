@@ -6,6 +6,7 @@ import axios from 'axios';
 import s from './editQuestionPage.module.scss';
 import { QUERY_KEYS } from '../../app/context/queryKeys';
 import Button from '../../components/button/Button';
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 type FormData = {
   title: string;
@@ -30,7 +31,7 @@ const EditQuestionPage = () => {
   const { data, isLoading, isError } = useQuery({
     queryKey: [...QUERY_KEYS.QUESTIONS, id],
     queryFn: async () => {
-      const res = await axios.get(`/api/questions/${id}`, {
+      const res = await axios.get(`${API_BASE}/questions/${id}`, {
         withCredentials: true,
       });
       return res.data.data as QuestionResponse;
@@ -51,7 +52,7 @@ const EditQuestionPage = () => {
 
   const mutation = useMutation({
     mutationFn: async (formData: FormData) => {
-      const res = await axios.patch(`/api/questions/${id}`, formData, {
+      const res = await axios.patch(`${API_BASE}/questions/${id}`, formData, {
         withCredentials: true,
       });
       return res.data;

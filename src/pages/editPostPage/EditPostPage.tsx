@@ -7,17 +7,20 @@ import s from '../createPostPage/createPostPage.module.scss';
 import Button from '../../components/button/Button';
 import { QUERY_KEYS } from '../../app/context/queryKeys';
 import Select from '../../components/select/Select';
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createSnippetSchema, FormData } from '../../app/schemas/schema';
 
 const fetchSnippetById = async (id: string) => {
-  const res = await axios.get(`/api/snippets/${id}`, { withCredentials: true });
+  const res = await axios.get(`${API_BASE}/snippets/${id}`, {
+    withCredentials: true,
+  });
   return res.data.data;
 };
 
 const fetchLanguages = async () => {
-  const res = await axios.get('/api/snippets/languages', {
+  const res = await axios.get(`${API_BASE}/snippets/languages`, {
     withCredentials: true,
   });
   return res.data.data;
@@ -25,7 +28,7 @@ const fetchLanguages = async () => {
 
 const updateSnippet = async (id: string, data: FormData) => {
   const res = await axios.patch(
-    `/api/snippets/${id}`,
+    '{API_BASE}/snippets/${id}',
     { language: data.language, code: data.code },
     { withCredentials: true },
   );

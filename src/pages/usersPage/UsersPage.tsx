@@ -4,6 +4,7 @@ import axios from 'axios';
 import { User } from '../../components/snippetCard/SnippetCard';
 import s from './usersPage.module.scss';
 import { Link } from 'react-router-dom';
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 const UsersPage = () => {
   const {
@@ -13,7 +14,9 @@ const UsersPage = () => {
   } = useQuery({
     queryKey: QUERY_KEYS.USERS,
     queryFn: async () => {
-      const res = await axios.get('/api/users', { withCredentials: true });
+      const res = await axios.get(`${API_BASE}/users`, {
+        withCredentials: true,
+      });
       return res.data.data.data as User[];
     },
   });

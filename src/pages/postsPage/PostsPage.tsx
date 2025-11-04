@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { CodeXml } from 'lucide-react';
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 import { QUERY_KEYS } from '../../app/context/queryKeys';
 import { Snippet } from '../../components/snippetCard/SnippetCard';
@@ -9,7 +10,7 @@ import SnippetList from '../../components/snippetList/SnippetList';
 import s from './postsPage.module.scss';
 
 const fetchUserSnippets = async (userId: string): Promise<Snippet[]> => {
-  const res = await axios.get(`/api/snippets?userId=${userId}`);
+  const res = await axios.get(`${API_BASE}/snippets?userId=${userId}`);
   return res.data.data.data;
 };
 

@@ -3,6 +3,8 @@ import axios from 'axios';
 import { AuthContext, User } from './AuthContext';
 import { STORAGE_KEYS } from './storageKeys';
 
+const API_BASE = import.meta.env.VITE_API_BASE || '';
+
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User>(null);
 
@@ -22,7 +24,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = async (username: string, password: string) => {
     try {
       const res = await axios.post(
-        '/api/auth/login',
+        `${API_BASE}/auth/login`,
         { username, password },
         { withCredentials: true },
       );

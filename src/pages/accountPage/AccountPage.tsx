@@ -13,28 +13,31 @@ import Button from '../../components/button/Button';
 import { LogOut, Trash2, User } from 'lucide-react';
 import TextField from '../../components/textField/TextField';
 import { PasswordFormData, passwordSchema } from '../../app/schemas/schema';
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 type UsernameFormData = { username: string };
 
 const updateUsername = async (data: UsernameFormData) => {
-  const res = await axios.patch('/api/me', data, { withCredentials: true });
+  const res = await axios.patch(`${API_BASE}/me`, data, {
+    withCredentials: true,
+  });
   return res.data;
 };
 
 const updatePassword = async (data: PasswordFormData) => {
-  const res = await axios.patch('/api/me/password', data, {
+  const res = await axios.patch(`${API_BASE}/me/password`, data, {
     withCredentials: true,
   });
   return res.data;
 };
 
 const deleteUser = async () => {
-  const res = await axios.delete('/api/me', { withCredentials: true });
+  const res = await axios.delete(`${API_BASE}/me`, { withCredentials: true });
   return res.data;
 };
 
 const fetchUserStatistic = async (userId: string) => {
-  const res = await axios.get(`/api/users/${userId}/statistic`, {
+  const res = await axios.get(`${API_BASE}/users/${userId}/statistic`, {
     withCredentials: true,
   });
 

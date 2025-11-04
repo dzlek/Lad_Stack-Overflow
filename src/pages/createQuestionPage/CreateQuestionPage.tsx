@@ -5,6 +5,7 @@ import axios from 'axios';
 import s from './createQuestionPage.module.scss';
 import { QUERY_KEYS } from '../../app/context/queryKeys';
 import Button from '../../components/button/Button';
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 type FormData = {
   title: string;
@@ -18,7 +19,7 @@ const CreateQuestionPage = () => {
 
   const mutation = useMutation({
     mutationFn: async (data: FormData) => {
-      const res = await axios.post('/api/questions', data, {
+      const res = await axios.post(`${API_BASE}/questions`, data, {
         withCredentials: true,
       });
       return res.data;

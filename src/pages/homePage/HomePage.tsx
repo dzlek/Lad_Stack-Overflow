@@ -7,9 +7,10 @@ import SnippetList from '../../components/snippetList/SnippetList';
 import s from './homePage.module.scss';
 import { Snippet } from '../../components/snippetCard/SnippetCard';
 import { QUERY_KEYS } from '../../app/context/queryKeys';
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 const fetchSnippets = async (): Promise<Snippet[]> => {
-  const res = await axios.get('/api/snippets');
+  const res = await axios.get(`${API_BASE}/snippets`);
   return res.data.data.data;
 };
 

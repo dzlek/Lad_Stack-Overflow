@@ -4,6 +4,7 @@ import axios from 'axios';
 import s from './userPage.module.scss';
 import { QUERY_KEYS } from '../../app/context/queryKeys';
 import { User } from 'lucide-react';
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 type UserStatisticData = {
   rating: number;
@@ -33,7 +34,7 @@ const UserPage = () => {
   } = useQuery({
     queryKey: [...QUERY_KEYS.USER_STATS, id],
     queryFn: async () => {
-      const res = await axios.get(`/api/users/${id}/statistic`, {
+      const res = await axios.get(`${API_BASE}/users/${id}/statistic`, {
         withCredentials: true,
       });
       return res.data.data as UserStatistic;

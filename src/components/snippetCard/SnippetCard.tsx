@@ -14,6 +14,7 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { QUERY_KEYS } from '../../app/context/queryKeys';
 import { useAuth } from '../../app/context/useAuth';
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 enum MarkType {
   LIKE = 'like',
@@ -96,7 +97,7 @@ const SnippetCard = ({ snippet, isAuth }: SnippetCardProps) => {
   const markMutation = useMutation({
     mutationFn: async (mark: MarkType) => {
       const res = await axios.post(
-        `/api/snippets/${snippet.id}/mark`,
+        `{API_BASE}/snippets/${snippet.id}/mark`,
         { mark },
         { withCredentials: true },
       );
@@ -109,7 +110,7 @@ const SnippetCard = ({ snippet, isAuth }: SnippetCardProps) => {
 
   const deleteMutation = useMutation({
     mutationFn: async () => {
-      await axios.delete(`/api/snippets/${snippet.id}`, {
+      await axios.delete(`${API_BASE}/snippets/${snippet.id}`, {
         withCredentials: true,
       });
     },
