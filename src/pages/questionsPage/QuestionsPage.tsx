@@ -42,8 +42,8 @@ const QuestionsPage = () => {
     },
   });
 
-  const handleEdit = () => {
-    navigate(`/questions/edit/{id}`);
+  const handleEdit = (id: string) => {
+    navigate(`/questions/edit/${id}`);
   };
 
   if (isLoading) return <div>Loading questions...</div>;
@@ -67,7 +67,7 @@ const QuestionsPage = () => {
             </Link>
             {currentUser?.id === q.user.id && (
               <span>
-                <SquarePen size={18} onClick={handleEdit} />
+                <SquarePen size={18} onClick={() => handleEdit(q.id)} />
                 <Trash2
                   size={18}
                   onClick={() =>
