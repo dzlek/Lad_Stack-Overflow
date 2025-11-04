@@ -11,9 +11,9 @@ import PostsPage from '../pages/postsPage/PostsPage';
 import CreatePostPage from '../pages/createPostPage/CreatePostPage';
 import EditPostPage from '../pages/editPostPage/EditPostPage';
 import QuestionsPage from '../pages/questionsPage/QuestionsPage';
+import CreateQuestionPage from '../pages/createQuestionPage/CreateQuestionPage';
 import UserPage from '../pages/userPage/UserPage';
 import UsersPage from '../pages/usersPage/UsersPage';
-import CreateQuestionPage from '../pages/createQuestionPage/CreateQuestionPage';
 
 export const router = createBrowserRouter([
   {
