@@ -10,7 +10,7 @@ import { QUERY_KEYS } from '../../app/context/queryKeys';
 const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 const fetchSnippets = async (): Promise<Snippet[]> => {
-  const res = await axios.get(`${API_BASE}/snippets`);
+  const res = await axios.get(`${API_BASE}/api/snippets`);
   return res.data.data.data;
 };
 
