@@ -1,4 +1,4 @@
-import s from './Button.module.scss';
+import s from './button.module.scss';
 
 export type ButtonVariant = 'text' | 'contained' | 'outlined';
 export type ButtonSize = 'small' | 'medium' | 'large';
