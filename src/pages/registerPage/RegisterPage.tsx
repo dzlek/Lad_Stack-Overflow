@@ -37,7 +37,7 @@ const RegisterPage = () => {
 
   const registerMutation = useMutation({
     mutationFn: (data: { username: string; password: string }) =>
-      axios.post(`${API_BASE}/api/auth/register`, data),
+      axios.post(`${API_BASE}/register`, data),
     onSuccess: () => {
       navigate('/login');
     },
