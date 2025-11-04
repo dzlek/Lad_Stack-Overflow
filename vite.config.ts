@@ -11,6 +11,9 @@ const dirname =
 // Vite config
 export default defineConfig({
   plugins: [react()],
+  build: {
+    outDir: 'dist',
+  },
   resolve: {
     alias: {
       '@': path.resolve(dirname, 'src'),
