@@ -81,7 +81,7 @@ const PostPage = () => {
 
       {!isLoading && snippet && (
         <>
-          <SnippetCard snippet={snippet} isAuth={true} currentUser={null} />
+          <SnippetCard snippet={snippet} isAuth={true} />
           <CommentsList comments={snippet.comments} />
           {isAuth && <CommentForm snippetId={id!} onSuccess={handleLocalAdd} />}
         </>

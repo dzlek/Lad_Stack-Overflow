@@ -8,6 +8,8 @@ const Header = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
+  const isQuestionsPage = location.pathname.startsWith('/questions');
+
   const createQuestion = () => {
     navigate(`/questions/create`);
   };
@@ -22,7 +24,7 @@ const Header = () => {
       </Link>
 
       <div className={s.controls}>
-        {location.pathname.startsWith('/questions') && (
+        {isQuestionsPage && (
           <Button onClick={createQuestion}>Ask Question</Button>
         )}
         {user && <Button onClick={logout}>SIGN OUT</Button>}

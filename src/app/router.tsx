@@ -12,6 +12,9 @@ import CreatePostPage from '../pages/createPostPage/CreatePostPage';
 import EditPostPage from '../pages/editPostPage/EditPostPage';
 import QuestionsPage from '../pages/questionsPage/QuestionsPage';
 import EditQuestionPage from '../pages/editQuestionPage/EditQuestionPage';
+import CreateQuestionPage from '../pages/createQuestionPage/CreateQuestionPage';
+import UserPage from '../pages/userPage/UserPage';
+import UsersPage from '../pages/usersPage/UsersPage';
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +26,7 @@ export const router = createBrowserRouter([
       { path: 'register', element: <RegisterPage /> },
       { path: 'post/:id', element: <PostPage /> },
       { path: 'edit/:id', element: <EditPostPage /> },
+      { path: 'user/:id', element: <UserPage /> },
 
       {
         element: <ProtectedRoute />,
@@ -32,7 +36,8 @@ export const router = createBrowserRouter([
           { path: 'post-snippet', element: <CreatePostPage /> },
           { path: 'questions', element: <QuestionsPage /> },
           { path: 'questions/edit/:id', element: <EditQuestionPage /> },
-          { path: 'users', element: <div>Users</div> },
+          { path: 'questions/create', element: <CreateQuestionPage /> },
+          { path: 'users', element: <UsersPage /> },
         ],
       },
     ],

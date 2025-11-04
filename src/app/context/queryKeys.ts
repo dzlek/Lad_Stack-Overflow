@@ -3,5 +3,6 @@ export const QUERY_KEYS = {
   USER_STATS: ['userStats'],
   SNIPPET_DETAILS: (id: string) => ['snippet', id],
   LANGUAGES: ['languages'],
+  USERS: ['users'],
   QUESTIONS: ['questions'],
 };

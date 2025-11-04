@@ -63,7 +63,7 @@ const QuestionsPage = () => {
             </div>
             <div>{q.description}</div>
             <Link to={`/questions/${q.id}`}>
-              <Eye color="rgb(25, 118, 210) " />
+              <Eye className={s.eyeButton} />
             </Link>
             {currentUser?.id === q.user.id && (
               <span>
